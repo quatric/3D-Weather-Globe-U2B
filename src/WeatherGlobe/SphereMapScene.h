@@ -1,0 +1,106 @@
+#import "WeatherGlobePrefix.h"
+#import "BaseAtlasScene.h"
+
+
+@interface SphereMapScene : BaseAtlasScene
+{
+    SphereMapController *_controller;
+    float _earthRadius;
+    float _glowThickness;
+    float _zoomFactor;
+    SMK_GL_Drawable *_earthHemisphere;
+    SMK_GL_Drawable *_atmosphereGlow;
+    SMK_GL_Material *_cityGlowsMaterial;
+    SMK_GL_2DTexture *_westTexture;
+    SMK_GL_2DTexture *_eastTexture;
+    SMK_GL_2DTexture *_westNormalsTexture;
+    SMK_GL_2DTexture *_eastNormalsTexture;
+    SMK_GL_Drawable *_gridMeshLow;
+    SMK_GL_Drawable *_gridMeshNorm;
+    SMK_GL_Drawable *_gridMeshHigh;
+    SphereRoutePointsContainer *_routePointsContainer;
+    NSMutableData *_cityMarkerMatricesAndColors;
+    SMK_GL_Drawable *_knopka;
+    SMK_GL_Drawable *_appleMarker;
+    SMK_GL_Drawable *_samalet;
+    NSMutableData *_appleMarkers;
+    NSMutableData *_jumpingCityMarkers;
+    struct WeatherGlobe_anon1 _initialPinVec;
+    SMK_GL_Drawable *_OSDrawable;
+    SMK_GL_Drawable *_starsDrawable;
+    SMK_GL_2DTexture *_starsTexture;
+    float _starsRadius;
+    SMK_GL_Drawable *_flaresDrawable;
+    SMK_GL_2DTexture *_flaresTexture;
+    struct WeatherGlobe_anon1 _sunScreenPos;
+    BOOL _wasVisible;
+    float _fadeFactor;
+    float _startFadeFactor;
+    double _fadeStartTime;
+    SMK_GL_Drawable *_moonDrawable;
+    float _moonOrbitRadius;
+    struct WeatherGlobe_anon1 _moonPosition;
+    float _moonRotation;
+    SMK_GL_Light *_sunLight;
+    float _previousZoomFactor;
+    NSPoint _previousPosition;
+    NSSize _previousContextSize;
+    SMK_GL_Drawable * _globeParts0[1];
+    SMK_GL_Drawable * _globeParts1[3];
+    SMK_GL_Drawable * _globeParts2[9];
+    SMK_GL_Drawable * _globeParts3[18];
+}
+- (void)drawObjectsInContext:(id)aContext;
+- (void)_drawAllBordersInContext:(id)aContext;
+- (void)drawRouteAndGvozdixinContext:(id)aContext;
+- (void)_setupMatrix:(struct WeatherGlobe_anon3 *)aMatrix toDisplayFlatMeshInRect:(NSRect)aRect;
+- (void)_drawZoneHighliteCaptionsInContext:(id)aContext;
+- (void)_drawZoneHiliteInContext:(id)aContext;
+- (BOOL)_drawInContext:(id)aContext countryCaption:(id)aCaption in2DRect:(NSRect)aRect;
+- (void)_drawMoonInContext:(id)aContext;
+- (void)_drawCloudsInContext:(id)aContext;
+- (void)_drawGlowInContext:(id)aContext;
+- (void)_drawStarsInContext:(id)aContext;
+- (void)_drawSunGlowAtPosition:(struct WeatherGlobe_anon2 *)aPosition inContext:(id)aContext;
+- (void)_drawGlobeInContext:(id)aContext;
+- (void)_drawGlobeWithLowQualityMapInContext:(id)aContext;
+- (void)_drawGlobeParts:(id)aParts withLOD:(NSInteger)aLOD inContext:(id)aContext;
+- (void)_startFrameDrawingWithLOD:(NSInteger)aLOD globeParts:(id)aParts;
+- (id)_getVisibleGlobePartsForLOD:(NSInteger)aLOD inContext:(id)aContext;
+- (void)_updatePrimaryColorForBuffer:(id)aBuffer forSecondHemisphere:(BOOL)aHemisphere;
+- (void)drawSceneInContext:(id)aContext withFrameSize:(NSSize)aSize;
+- (void)_setLightDirection:(struct WeatherGlobe_anon2)aDirection;
+- (void)setZoomFactor:(CGFloat)aFactor;
+- (void)highlightCountry:(id)aCountry state:(id)aState timeZone:(id)aZone;
+- (void)recalculateCountryHilite;
+- (void)dragConcludedWithAllEntries;
+- (void)dragExitedWithAllEntries;
+- (void)_removeJumpingStuff;
+- (void)dragBringsEntries:(id)aEntries;
+- (void)distCalcSetChangedTo:(id)aTo;
+- (void)_evaluateMatrix:(struct WeatherGlobe_anon3 *)aMatrix forPinWithEarthVec:(struct WeatherGlobe_anon2 *)aVec;
+- (id)routePathsMesh;
+- (CGFloat)earthRadius;
+- (NSRect)_evaluateGlobeViewRect;
+- (NSPoint)get2DCoordinatesFromGeoPoint:(NSPoint)aPoint onViewedSide:(BOOL *)aSide;
+- (struct WeatherGlobe_anon2)get3DCoordinatesFromGeoPoint:(NSPoint)aPoint;
+- (BOOL)geoPointFromNormalizedViewPoint:(NSPoint *)aPoint;
+- (id)routePointsContainer;
+- (id)sceneController;
+- (BOOL)requiresAnimation;
+- (void)dealloc;
+- (id)initWithContainer:(id)aContainer controller:(id)aController;
+- (void)fillVerticesWithAllCitiesInVB:(struct WeatherGlobe_anon4 *)aVB;
+- (void)_createCityMarker;
+- (void)_createCountryStateHiliters;
+- (void)_createAxisDrawable;
+- (void)_createStarsDrawable;
+- (void)_createAndSetupLights;
+- (void)_createMoon;
+- (void)_createGlobeParts;
+- (void)_createHiQualityMapGlobeParts;
+- (id)_createGridMeshWithR:(CGFloat)aR numSegs:(NSInteger)aSegs numStacks:(NSInteger)aStacks linesPerSeg:(NSInteger)aSeg;
+- (void)_createGlowWithSegments:(NSInteger)aSegments radius:(CGFloat)aRadius;
+- (void)_createAndSetupCamera;
+@end
+
